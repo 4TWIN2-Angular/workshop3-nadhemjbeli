@@ -3,30 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './composant/header/header.component';
-import { FooterComponent } from './composant/footer/footer.component';
-
-import { ContentComponent } from './composant/content/content.component';
-import { ListUserComponent } from './composant/list-user/list-user.component';
-import { FormsModule } from '@angular/forms';
-import { ListProduitsComponent } from './composant/list-produits/list-produits.component';
-import { AddProduitComponent } from './composant/add-produit/add-produit.component';
+import { MainInvoiceComponent } from './main-invoice/main-invoice.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ContentComponent,
-    ListUserComponent,
-    ListProduitsComponent,
-    AddProduitComponent,
-    
+    MainInvoiceComponent,
+    InvoiceListComponent,
+    InvoiceComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
