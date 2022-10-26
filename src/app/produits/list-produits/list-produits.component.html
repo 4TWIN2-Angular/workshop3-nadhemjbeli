@@ -1,0 +1,93 @@
+<div>
+    <h1>Recherche produit:</h1>
+    Code : <input type="text" [(ngModel)]="code">
+    </div>
+    <!-----Recherche - Q8 - Par défaut tous les produits sont affichés-->
+    /////////////////////////////////////////////////////////////////
+    <h1>Liste 1 : Q7-a "property-binding" + Q8 </h1>
+    <!----1ère façon : Property binding : property style--->
+    <ol>
+        <div *ngFor="let p of listProduits; let i=index" 
+        [style.color]="p.prixUnitaire <= 50 ? 'blue' : ''" 
+        [style.fontStyle]="getStyle(p.prixUnitaire)"
+        [style.fontSize.px]="getTaille(p)">
+        <li  *ngIf="p.code == code || code =='' ">
+            Produit : <label [hidden]="hidden || nb != i">TVA modifiée</label><button (click)="updateTVA(p,i)" [disabled]="p.tauxTVA==0.02">Ajuster TVA</button>
+            <ul>
+                <li>Identifiant: {{ p.idProduit }}</li>
+                <li>Code: {{ p.code }}</li>
+                <li>Prix Unitaire: {{ p.prixUnitaire }} </li>
+                <li>Taux TVA: {{ p.tauxTVA }} </li>
+            </ul>
+        </li>
+    </div>
+    </ol>
+    <!--------Fin recherche Q8------->
+    *********************************************************************
+    <h1>Liste 2 : Q7-b "ngStyle"  + Q9</h1>
+    <!----2ème  façon : ngStyle--->
+    <!-------------------Recherche Q9: property binding sur la propriété pattern----------------->
+    <ol>
+       <!--  <li *ngFor="let p of listProduits; let i=index" 
+        [ngStyle]="getTheStyle(p)" > -->
+        <div *ngFor="let p of listProduits; let i=index"  
+        [ngStyle]="p.prixUnitaire <= 50 ? {'color': 'blue', 'fontStyle':'italic', 'fontSize':'20px'} : {}" > 
+        <li *ngIf="p.code.startsWith(code)">
+            Produit : <label [hidden]="hidden || nb != i">TVA modifiée</label><button (click)="updateTVA(p,i)" [disabled]="p.tauxTVA==0.02">Ajuster TVA</button>
+            <ul>
+                <li>Identifiant: {{ p.idProduit }}</li>
+                <li>Code: {{ p.code }}</li>
+                <li>Prix Unitaire: {{ p.prixUnitaire }} </li>
+                <li>Taux TVA: {{ p.tauxTVA }} </li>
+            </ul>
+        </li>
+    </div>
+    </ol>
+    ***************************************************************
+    <h1>Liste 3 : Q7-c "ngClass"  </h1>
+    <!----3ème  façon : ngClass--->
+    <ol>
+       
+         <!-- <li *ngFor="let p of listProduits; let i=index" 
+         [ngClass]="p.prixUnitaire <= 50 ? 'class1' : '' " >  -->
+         <li *ngFor="let p of listProduits; let i=index" 
+         [ngClass]="getClasseCss(p)" >
+             Produit : <label [hidden]="hidden || nb != i">TVA modifiée</label><button (click)="updateTVA(p,i)" [disabled]="p.tauxTVA==0.02">Ajuster TVA</button>
+             <ul>
+                 <li>Identifiant: {{ p.idProduit }}</li>
+                 <li>Code: {{ p.code }}</li>
+                 <li>Prix Unitaire: {{ p.prixUnitaire }} </li>
+                 <li>Taux TVA: {{ p.tauxTVA }} </li>
+             </ul>
+         </li>
+     </ol>
+    
+    <h1>Ajout d'un produit</h1>
+    <form>
+    <table>
+        <tr>
+            <td>idProduit</td>
+            <td><input type="number" name="idp" [(ngModel)]="p.idProduit"></td>
+        </tr>
+        <tr>
+            <td>Code</td>
+            <td><input type="text" name="code" [(ngModel)]="p.code"></td>
+        </tr>
+        <tr>
+            <td>Libellé</td>
+            <td><input type="text" name="libelle" [(ngModel)]="p.libelle"></td>
+        </tr>
+        <tr>
+            <td>Prix Unitaire</td>
+            <td><input type="number" name="pu" [(ngModel)]="p.prixUnitaire"></td>
+        </tr>
+        <tr>
+            <td>Taux TVA</td>
+            <td><input type="number" name="taux" [(ngModel)]="p.tauxTVA"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button (click)="addProduct()">Ajouter</button></td>
+        </tr>
+    </table>
+    </form>

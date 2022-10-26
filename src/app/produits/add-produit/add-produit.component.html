@@ -1,0 +1,83 @@
+<h1>Ajout d'un produit</h1>
+    <form #f="ngForm" (ngSubmit)="addProduct(f.value)">
+    <label for="idp">idProduit</label>
+        <input type="number" required class="form-control" name="idp" #idp="ngModel" [(ngModel)]="p.idProduit">
+        <div *ngIf="idp.invalid && idp.touched">
+            <div *ngIf="idp.errors['required']" class="alert alert-danger" role="alert">
+                idProduit Obligatoire !
+            </div>
+            <!--  <div *ngIf="idp.errors?.['minlength']" class="alert alert-danger" role="alert">
+              il faut minimum {{ idp.errors['minlength'].requiredLength}} caractères alors que vous avez écrits {{ idp.errors['minlength'].actualLength}}
+            </div>
+            <div *ngIf="idp.hasError('pattern')" class="alert alert-danger" role="alert">
+              tous des lettres
+            </div>  -->
+        </div>
+        <label for="code">Code</label>
+        <input type="text" required pattern="[a-zA-Z-0-9]{8}" class="form-control" name="code" #code="ngModel" [(ngModel)]="p.code">
+        <div *ngIf="code.invalid && code.touched">
+            <div *ngIf="code.errors['required']" class="alert alert-danger" role="alert">
+                Code Obligatoire !
+            </div>
+            <div *ngIf="code.hasError('pattern')" class="alert alert-danger" role="alert">
+              Le code doit contenir 8 caractères
+            </div>  
+        </div>
+        <label for="libelle">libellé</label>
+        <input type="text" required minlength="3" class="form-control" name="libelle" #lib="ngModel" [(ngModel)]="p.libelle">
+        <div *ngIf="lib.invalid && lib.touched">
+            <div *ngIf="lib.errors['required']" class="alert alert-danger" role="alert">
+                libellé Obligatoire !
+            </div>
+            <div *ngIf="lib.errors?.['minlength']" class="alert alert-danger" role="alert">
+              il faut minimum <strong>{{ lib.errors['minlength'].requiredLength}}</strong> 
+              caractères alors que vous avez écrits <strong>{{ lib.errors['minlength'].actualLength}}</strong>
+            </div> 
+        </div>
+        <label for="pu">Prix Unitaire</label>
+        <input type="number" required pattern="[1-9][0-9]*" class="form-control" name="pu" #pu="ngModel" [(ngModel)]="p.prixUnitaire">
+        <div *ngIf="pu.invalid && pu.touched">
+            <div *ngIf="pu.errors['required']" class="alert alert-danger" role="alert">
+                prix unitaire Obligatoire !
+            </div>
+            <div *ngIf="pu.hasError('pattern')" class="alert alert-danger" role="alert">
+              Le prix unitaire doit contenir un chiffre non nul
+            </div>  
+        </div>
+        <label for="taux">Taux TVA</label>
+        <input type="number" required class="form-control" name="taux" #taux="ngModel" [(ngModel)]="p.tauxTVA">
+        <div *ngIf="taux.invalid && taux.touched">
+            <div *ngIf="taux.errors['required']" class="alert alert-danger" role="alert">
+                Taux TVA Obligatoire !
+            </div>
+        </div>
+        <div *ngIf="!valid">
+            <button class="btn btn-primary" [disabled]="f.invalid">Suivant</button>
+        </div>
+    </form><br>
+    <div *ngIf="valid">
+        <form #f2="ngForm" (ngSubmit)="addDetailProduct(f2.value)">
+            <label for="iddp">id Details produit</label>
+            
+            <input type="number" required ngModel required class="form-control" name="iddp" #iddp="ngModel">
+            <label for="datec">Date Creation</label>
+            <input type="date" required ngModel #datec="ngModel" class="form-control" name="datec">
+            <div *ngIf="datec.valid">
+                    <label for="datem">Date Modification</label>
+                    <input type="date" required ngModel #datem="ngModel" class="form-control" name="datem">
+            </div>
+            <div>
+                <label for="cat">Categorie Produit</label>
+                <select class="form-control" name="cat" ngModel required #cat="ngModel">
+                    <option value="Electromenager">Electromenager</option>
+                    <option value="Alimentaire">Alimentaire</option>
+                    <option value="Quincaillerie">Quincaillerie</option>
+                </select>
+            </div>
+            <div *ngIf="f2.valid">
+                <button class="btn btn-primary" [disabled]="f2.invalid">Ajouter</button>
+            </div>
+            
+        </form>
+
+    </div>

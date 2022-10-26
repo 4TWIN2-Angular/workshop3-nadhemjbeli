@@ -1,0 +1,12 @@
+<nav>
+    <style>
+        a{
+            margin-left: 10px;
+        }
+    </style>
+    <a [routerLink]="['/produit', 'list']">list products</a>
+    <a [routerLink]="['/produit', 'add']">add product</a>
+</nav>
+<div>
+    <router-outlet></router-outlet>
+</div>
